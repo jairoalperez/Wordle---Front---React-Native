@@ -10,20 +10,28 @@ const Block = ({letter}) => (
     </View>
 )
 
-const GuessRow = () => (
+const GuessRow = ({ guess }) => {
+  const letters = guess.split("")
+
+    return(
     <View style={styles.guessRow}>
-        <Block letter="A" />
-        <Block letter="E" />
-        <Block letter="I" />
-        <Block letter="O" />
-        <Block letter="" />
+      <Block letter={letters[0]} />
+      <Block letter={letters[1]} />
+      <Block letter={letters[2]} />
+      <Block letter={letters[3]} />
+      <Block letter={letters[4]} />
     </View>
   )
+    }
 
-  const KeyboardRow = ({ letters}) => (
+  const KeyboardRow = ({ 
+    letters,
+    onKeyPress,
+    }) => (
     <View style={styles.keyboardRow}>
       {letters.map(letter => (
-        <TouchableOpacity>
+        <TouchableOpacity
+        onPress={() => onKeyPress(letter)}>
           <View style={styles.key}>
             <Text style={styles.keyLetter}>{letter}</Text>
           </View>
@@ -32,18 +40,18 @@ const GuessRow = () => (
     </View>
   )
 
-    const Keyboard = () => {
+    const Keyboard = ({ onKeyPress }) => {
     const row1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"]
     const row2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"]
     const row3 = ["Z", "X", "C", "V", "B", "N", "M", "⌫"]
   
     return (
         <View style={styles.keyboard}>
-        <KeyboardRow letters={row1} />
-        <KeyboardRow letters={row2} />
-        <KeyboardRow letters={row3} />
+        <KeyboardRow letters={row1} onKeyPress={onKeyPress}/>
+        <KeyboardRow letters={row2} onKeyPress={onKeyPress}/>
+        <KeyboardRow letters={row3} onKeyPress={onKeyPress}/>
         <View style={styles.keyboardRow}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => onKeyPress("ENTER")}>
           <View style={styles.key}>
             <Text style={styles.keyLetter}>ENTER</Text>
           </View>
@@ -54,20 +62,26 @@ const GuessRow = () => (
 }
 
 const Juego = ({navigation}) => {
+
+  const [guess, setGuess] = React.useState("")
+
+    const handleKeyPress = (letter) => {
+      setGuess(guess + letter)
+    }
     return ( 
 
       <View style={styles.container}>
 
         <View style={styles.containerj}>
-        <GuessRow />
-        <GuessRow />
-        <GuessRow />
-        <GuessRow />
-        <GuessRow />
-        <GuessRow />
+        <GuessRow guess={guess} />
+        <GuessRow guess="" />
+        <GuessRow guess="" />
+        <GuessRow guess="" />
+        <GuessRow guess="" />
+        <GuessRow guess="" />
         </View>
         
-        <Keyboard />
+        <Keyboard onKeyPress={handleKeyPress}/>
         </View>
 
     
