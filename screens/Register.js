@@ -1,39 +1,59 @@
 import React from "react";
-import {View, StyleSheet, Text, TouchableOpacity, TextInput} from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import {View, StyleSheet, Text, Image, TouchableOpacity, Alert, TextInput} from "react-native";
 
-const Login = ({}) => {
-    const navigation = useNavigation();
+
+const Register = ({navigation}) => {
     return (
         <View style={styles.container}>
 
             <Text style={styles.title}>
-                INICIAR SESION
+                REGISTRARSE
             </Text>
 
             <TextInput
-            style={styles.tinputce} 
+            style={styles.tinput1} 
+            keyboardType='default'
+            placeholder='Nombre Completo'
+            placeholderTextColor= 'gray'/>
+
+            <TextInput
+            style={styles.tinput} 
+            keyboardType='default'
+            placeholder='Username'
+            placeholderTextColor= 'gray'/>
+
+            <TextInput
+            style={styles.tinput} 
             keyboardType='email-address'
             placeholder='Correo Electronico'
             placeholderTextColor= 'gray'/>
 
             <TextInput
             secureTextEntry={true} 
-            style={styles.tinputp}
+            style={styles.tinput} 
             keyboardType='default'
             placeholder='Contraseña'
             placeholderTextColor= 'gray'/>
 
+            <TextInput
+            secureTextEntry={true} 
+            style={styles.tinput} 
+            keyboardType='default'
+            placeholder='Confirmar Contraseña'
+            placeholderTextColor= 'gray'/>
+
             <TouchableOpacity
-                onPress={() => {
-                    navigation.navigate('Hub')
-                    
+                onPress={() => { 
+                    navigation.navigate('Verificacion')
+                    Alert.alert('Ingresar codigo de verificacion recibido en el correo')
                 }}
                 style={styles.button}>
                     <Text style={styles.textbutton}>
-                    Iniciar Sesion
+                    Registrarse
                     </Text>
             </TouchableOpacity>
+
+            
 
         </View>
     )
@@ -55,9 +75,9 @@ const styles = StyleSheet.create({
         color: '#6baa64'
     
       },
-      tinputce: {
+      tinput1: {
         height: 40,
-        marginTop: 80,
+        marginTop: 50,
         padding: 10,
         height: 50, 
         width: 250,
@@ -65,7 +85,7 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
 
       },
-      tinputp: {
+      tinput: {
         height: 40,
         marginTop: 12,
         padding: 10,
@@ -91,7 +111,13 @@ const styles = StyleSheet.create({
         color: "white",
         
       },
+      textf: {
+        fontSize: 15,
+        color: "white",
+        marginTop: 20,
+      }
+
 
 });
 
-export default Login
+export default Register

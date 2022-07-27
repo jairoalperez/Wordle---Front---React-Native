@@ -1,43 +1,41 @@
 import React from "react";
-import {View, StyleSheet, Text, TouchableOpacity, TextInput} from "react-native";
+import {View, StyleSheet, Text, TouchableOpacity, TextInput, Alert} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-const Login = ({}) => {
+const Verificacion = ({}) => {
     const navigation = useNavigation();
     return (
         <View style={styles.container}>
 
             <Text style={styles.title}>
-                INICIAR SESION
+                VERIFICACION
+            </Text>
+
+            <Text style={styles.text}>
+                Ingresar codigo de verificacion recibido en el correo
             </Text>
 
             <TextInput
-            style={styles.tinputce} 
-            keyboardType='email-address'
-            placeholder='Correo Electronico'
-            placeholderTextColor= 'gray'/>
-
-            <TextInput
-            secureTextEntry={true} 
-            style={styles.tinputp}
-            keyboardType='default'
-            placeholder='Contraseña'
+            style={styles.tinput} 
+            placeholder='Codigo'
             placeholderTextColor= 'gray'/>
 
             <TouchableOpacity
                 onPress={() => {
-                    navigation.navigate('Hub')
+                    navigation.navigate('Home')
+                    Alert.alert('Registro Satisfactorio')
                     
                 }}
                 style={styles.button}>
                     <Text style={styles.textbutton}>
-                    Iniciar Sesion
+                    Confirmar
                     </Text>
             </TouchableOpacity>
 
         </View>
     )
 };
+export default Verificacion
 
 const styles = StyleSheet.create({
 
@@ -55,7 +53,10 @@ const styles = StyleSheet.create({
         color: '#6baa64'
     
       },
-      tinputce: {
+      text:{
+        fontSize: 16,
+      },
+      tinput: {
         height: 40,
         marginTop: 80,
         padding: 10,
@@ -64,16 +65,6 @@ const styles = StyleSheet.create({
         borderRadius: 40,
         backgroundColor: "white",
 
-      },
-      tinputp: {
-        height: 40,
-        marginTop: 12,
-        padding: 10,
-        height: 50, 
-        width: 250,
-        borderRadius: 40,
-        backgroundColor: "white"
-        
       },
       button: {
         backgroundColor: "#6baa64",
@@ -93,5 +84,3 @@ const styles = StyleSheet.create({
       },
 
 });
-
-export default Login
