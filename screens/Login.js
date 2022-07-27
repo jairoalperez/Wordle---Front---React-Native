@@ -26,7 +26,7 @@ const Login = ({}) => {
 
             <TouchableOpacity
                 onPress={() => {
-                    navigation.navigate('Inicio')
+                    navigation.navigate('Hub')
                     
                 }}
                 style={styles.button}>
