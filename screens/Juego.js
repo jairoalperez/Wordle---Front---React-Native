@@ -1,9 +1,10 @@
 import { color } from "@rneui/base";
 import React from "react";
-import {View, StyleSheet, Text, Image, TouchableOpacity, Button} from "react-native";
+import {View, StyleSheet, Text, TouchableOpacity, Button} from "react-native";
 
-
-
+/*---------------------------------------------------------------------------------------
+-------------------------------- Bloque de Letras ---------------------------------------
+---------------------------------------------------------------------------------------*/
 const Block = ({
   index,
   guess,
@@ -35,6 +36,10 @@ const Block = ({
 
   }
 
+
+/*---------------------------------------------------------------------------------------
+------------------------------------- Fila de Letras ------------------------------------
+---------------------------------------------------------------------------------------*/  
 const GuessRow = ({ 
   guess,
   word,
@@ -52,6 +57,10 @@ const GuessRow = ({
   )
     }
 
+
+  /*---------------------------------------------------------------------------------------
+  ------------------------------------- Fila de Teclado -----------------------------------
+  ---------------------------------------------------------------------------------------*/
   const KeyboardRow = ({ 
     letters,
     onKeyPress,
@@ -68,6 +77,9 @@ const GuessRow = ({
     </View>
   )
 
+    /*---------------------------------------------------------------------------------------
+    ------------------------------------- Teclado -------------------------------------------
+    ---------------------------------------------------------------------------------------*/
     const Keyboard = ({ onKeyPress }) => {
     const row1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"]
     const row2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L", "Ñ"]
@@ -90,13 +102,29 @@ const GuessRow = ({
 }
 
 
+/*---------------------------------------------------------------------------------------
+------------------------------------- Palabras Registradas ------------------------------
+---------------------------------------------------------------------------------------*/
+const words = ["APOYO", "ARMES", "BESOS", "ARCOS", "BOTAS", "BOTAN", "ASILO", "BRUTA", "BRUTO", "BUSES", "AÉREA", "AZOTE", "AGUDO", "BAÑOS",
+               "CAJAS", "RAMPA", "CALCE", "CHILE", "CUNAS", "CURSO", "CREMA", "CRECE", "CANSA", "COJOS", "CAUSA", "CERDO", "DONEN", "COMAS",
+               "DATOS", "CAZAN", "DOMAN", "DILES", "DENSA", "DAÑOS", "CERAS", "FIRMA", "FORME", "HIJAS", "HIJOS", "GANAS", "GANAR", "GANES", 
+               "GAFAS", "HILOS", "HINCA", "HINCO", "GIROS", "GIRAS", "GORDA", "GORDO", "IDEAS", "EVITA", "JAPON", "JALON", "FETOS", "FILAS", 
+               "JOYAS", "FALLE", "FALLA", "FALLO", "HACEN", "HACES", "HABIA", "HAGAN", "HABRA", "HABRE", "FETOS", "FERIA", "JUGOS", "METAS", 
+               "METES", "MEZAS", "MICAS", "LUCHA", "LUCHÉ", "LOTEO", "LABRA", "LACRA", "LACTA", "LADRO", "MANGO", "MITOS", "MITRO", "MISAS", 
+               "MIRAN", "MIRAS", "MIGRO", "MOJAS", "MOJEN", "MARES", "MARCO", "LATAS", "LAXAS", "MARES", "LAXAS", "LIBIA", "MEDIA", "MEDIO", 
+               "MOSCU", "MONOS", "MONAS", "MORAS", "MOÑOS", "MOVER", "MEMES", "LIMAS", "MUCAS", "MANCO", "MENES", "LIBRO", "MESES", "LOROS", 
+               "MUEVE", "LOSAS", "MAYAS", "MATES", "MAZOS", "MUDAS", "MUDOS", "MUCOS", "MOÑOS", "MOTAS", "MATAS", "LEVES", "LEMAS", "LINDA", 
+               "LINDO", "PACAS", "PESES", "PESOS", "PETAS", "PAGUE", "NABOS", "PAJAS", "NAZCA", "NACER", "PARDA", "PODIA", "PANES", "PASES", 
+               "PASEN", "PASAR", "PASOS", "ODIOS", "ODIAS", "PECAS", "PAÑAL", "POSEN", "PISTA", "OBRAS", "OIRTE", "PUJAN", "PUEDO", "PRIMO", 
+               "PERAS", "PENES", "PENDA", "PANDA", "PEGUE", "PENAN", "OVULO", "RETES", "RAYAS", "RATAS", "RATOS", "RATON", "ROMAS", "ROMOS", 
+               "QATAR", "QUEME", "QUESO", "QUITO", "SELVA", "SALGO", "SUDAR", "SUDAS", "TABUS", "TACOS", "TIRAS", "SUDAN", "VIENE", "VIERA", 
+               "TRAES", "TRAER", "TROTA", "TROTO", "URDAS", "USAOS", "USATE", "USEIS", "VACAS", "VACAN", "VAGOS", "VAGAS", "VAGUE", "WIKIS", 
+               "VUDUS", "VOTAR", "VOTES", "VIDEO", "VUDUS", "VUELO", "YATES", "YEMAS", "YEMEN", "YENDO", "YENES", "YESCA", "ZACAS", "VOTAD",]
 
-const words = ["APODO", "ADIOS", "BAÑOS", "BESOS", "CACAO", "CEJAS", "CLAVO","CALMA", "DEBER", "DADOS", "DOTES", "EMOJI", "ERIZO", "FALLO",
-               "FUGAS", "GANAS", "GIROS", "HECHO", "HORNO", "IDEAS", "ISLAS","JEFES", "JOYAS", "KURDA", "LABIA", "LATAS", "MAGOS", "METAS",
-               "NIÑOS", "NUBES", "OBRAS", "OVULO", "PELOS", "PLANA", "QUEMO","QUITO", "RABIA", "RATAS", "SALTO", "SOÑAR", "TACOS", "TUBOS",
-               "URNAS", "VACAS", "VOLAR", "WIKIS", "YOGUR", "ZORRO", "ZONAS"]
 
-
+/*---------------------------------------------------------------------------------------
+------------------------------------- Posiciones de Palabras ----------------------------
+---------------------------------------------------------------------------------------*/         
 const defaultGuess = {
   0: "",
   1: "",
@@ -106,8 +134,50 @@ const defaultGuess = {
   5: "",
 }
 
+
+/*---------------------------------------------------------------------------------------
+------------------------------------- Funcionalidad del Juego ---------------------------
+---------------------------------------------------------------------------------------*/ 
 const Juego = ({navigation}) => {
 
+  const tiempo = 100
+  var intervalo = 1000
+
+
+  //Temporizador
+  const [seconds, setSeconds] = React.useState(tiempo)
+  const [customInterval, setCustomInterval] = React.useState()
+
+  //comenzar tiempo
+  const startTimer = () => {
+    setCustomInterval(
+      setInterval(() => {
+        changeTime()
+      }, intervalo)
+    )
+  }
+
+  //parar tiempo
+  const stopTimer = () => { 
+    if (customInterval) {
+      clearInterval(customInterval)
+      setGameComplete(true)
+    }
+  }
+
+  //cambiar tiempo
+  const changeTime = () => {
+    setSeconds((prevState) => {
+      if (prevState == 0) {
+        stopTimer(true)
+        setSeconds(0)
+        setGameComplete(true)
+      }
+      return prevState - 1
+    })
+  }
+
+  //declarando las constantes del juego
   const [activeWord, setActiveWord] = React.useState(words[0])
   const [guessIndex, setGuessIndex] = React.useState(0)
   const [guesses, setGuesses] = React.useState(defaultGuess)
@@ -117,16 +187,20 @@ const Juego = ({navigation}) => {
       const guess = guesses[guessIndex]
 
       if (letter === "ENTER") {
+
+        //Tamaño de palabra debe ser 5 letras
         if (guess.length !== 5) {
           alert("La palabra debe tener 5 caracteres")
           return
         }
 
+        //La palabra debe estar registrada
         if (!words.includes(guess)) {
           alert("La palabra no esta registrada, intente de nuevo")
           return
         }
-
+        
+        //Juego Completado (Victoria)
         if (guess === activeWord) {
           setGuessIndex(guessIndex + 1)
           setGameComplete(true)
@@ -134,6 +208,7 @@ const Juego = ({navigation}) => {
           return
         }
 
+        //Juego Completado (Derrota)
         if (guessIndex < 5) {
           setGuessIndex(guessIndex + 1)
         } else {
@@ -144,13 +219,13 @@ const Juego = ({navigation}) => {
 
       }
 
-
+      //Tecla de Borrar
       if (letter === "⌫") {
         setGuesses({...guesses, [guessIndex]: guess.slice(0, -1) })
         return
       }
 
-
+      
       if (guess.length >= 5) {
         return
       }
@@ -158,16 +233,25 @@ const Juego = ({navigation}) => {
       setGuesses({ ...guesses, [guessIndex]: guess + letter })
     }
 
+    //Inicio/Reinicio de Juego
     React.useEffect(() => {
+
       if (!gameComplete) {
         setActiveWord(words[Math.floor(Math.random() * words.length)])
+        startTimer(true)
+        setSeconds(tiempo)
+        setCustomInterval((intervalo))
         setGuesses(defaultGuess)
         setGuessIndex(0)
       }
     }, [gameComplete])
 
-    return ( 
 
+    /*---------------------------------------------------------------------------------------
+    ------------------------------------- Vista del Juego -----------------------------------
+    ---------------------------------------------------------------------------------------*/ 
+    return ( 
+      
       <View style={styles.container}>
 
         <View style={styles.containerj}>
@@ -203,18 +287,25 @@ const Juego = ({navigation}) => {
         />
         </View>
 
+        <Text style={styles.textTimer}>
+          {seconds < 10 ? seconds : seconds}
+        </Text>
+
         {gameComplete ? (
           <View style={styles.gameCompleteWrapper}>
-            <Text>
-              <Text style={styles.bold}>Palabra Correcta:</Text> {activeWord}
+            <Text style={styles.bold}>
+              <Text >Palabra Correcta: {activeWord}</Text> 
             </Text>
             <View>
-              <Button
-                title="Comenzar de Nuevo"
-                onPress={() => {
-                  setGameComplete(false)
-                }}
-              />
+            <TouchableOpacity
+              onPress={() => {
+                setGameComplete(false)
+              }}
+              style={styles.buttonRestart}>
+              <Text style={styles.textbuttonR}>
+                Comenzar de Nuevo
+              </Text>
+            </TouchableOpacity>
             </View>
           </View>
         ) : null}
@@ -222,14 +313,17 @@ const Juego = ({navigation}) => {
         <Keyboard onKeyPress={handleKeyPress}/>
         </View>
 
-    
-
     )
 };
 export default Juego
 
+
+/*---------------------------------------------------------------------------------------
+------------------------------------- Estilos -------------------------------------------
+---------------------------------------------------------------------------------------*/ 
 const styles = StyleSheet.create({
 
+    //Contenedor de la vista general del juego
     container: {
       flex: 1,
       justifyContent: "center",
@@ -237,15 +331,19 @@ const styles = StyleSheet.create({
       backgroundColor: "lightgreen",
     },
 
+    //Contenedor de los cuadros
     containerj: {
         marginBottom: 40,
     },
 
+    //Fila
     guessRow: {
         flexDirection: "row",
         justifyContent: "center",
       },
-      guessSquare: {
+
+    //Cuadrado
+    guessSquare: {
         borderColor: "white",
         backgroundColor : "black",
         borderWidth: 2,
@@ -255,22 +353,27 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         margin: 5,
       },
-      guessLetter: {
+    
+    //Letra
+    guessLetter: {
         fontSize: 20,
         fontWeight: "bold",
         color: "white",
       },
 
+    //Contenedor del teclado
     keyboard: { 
     flexDirection: "column" ,
     },
 
+    //Fila del teclado
     keyboardRow: {
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: 'center',
     marginBottom: 10,
     },
 
+    //Contenedor de la letra del teclado
     key: {
         backgroundColor: "white",
         padding: 10,
@@ -278,31 +381,63 @@ const styles = StyleSheet.create({
         borderRadius: 5,
     },
 
+    //Letra del teclado
     keyLetter: {
         fontWeight: "500",
-        fontSize: 15,
+        fontSize: 20,
     },
 
+    //Color de las letras seleccionadas
     guessedLetter: {
       color: "#fff",
     },
+
+    //Letra Correcta
     guessCorrect: {
       backgroundColor: "#6aaa64",
       borderColor: "#6aaa64",
     },
 
+    //Letra en la palabra
     guessInWord: {
-      backgroundColor: "yellow"
+      backgroundColor: "goldenrod"
     },
     
+    //Letra no en la palabra
     guessNotInWord: {
       backgroundColor: 'gray'
     },
 
+    //Timer
+    textTimer: {
+      fontSize: 30,
+      marginBottom: 10,
+    },
+
+    //Juego Completado Opciones
     gameCompleteWrapper: {
+      backgroundColor : 'white',
       alignItems: "center",
+      justifyContent: 'center',
+      marginBottom: 20,
+      borderRadius: 40,
+      width: 300,
+      height: 80,
     },
     bold: {
+      fontSize: 20,
       fontWeight: "bold",
+      marginBottom: 5,
     },
+    buttonRestart: {
+      backgroundColor: 'darkblue',
+      margintop: 10,
+      padding: 5,
+      borderRadius: 40
+    },
+    textbuttonR: {
+      fontSize: 20,
+      color: 'white',
+    },
+
 });
