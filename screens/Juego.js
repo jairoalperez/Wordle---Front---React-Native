@@ -1,13 +1,13 @@
 import { color } from "@rneui/base";
 import React from "react";
-import {View, StyleSheet, Text, TouchableOpacity, Button} from "react-native";
+import {View, StyleSheet, Text, TouchableOpacity, Button, Alert} from "react-native";
 import CrearRoom from "./CrearRoom";
 
 /*---------------------------------------------------------------------------------------
 -------------------------------- Bloque de Letras ---------------------------------------
 ---------------------------------------------------------------------------------------*/
 
-
+var ronda = 0
 
 const Block = ({
   index,
@@ -142,10 +142,11 @@ const defaultGuess = {
 /*---------------------------------------------------------------------------------------
 ------------------------------------- Funcionalidad del Juego ---------------------------
 ---------------------------------------------------------------------------------------*/ 
-const Juego = ({}) => {
+const Juego = ({navigation}) => {
 
   const tiempo = global.time
   var intervalo = 1000
+  const rondas = global.rondas
 
 
   //Temporizador
@@ -223,6 +224,7 @@ const Juego = ({}) => {
 
       }
 
+
       //Tecla de Borrar
       if (letter === "⌫") {
         setGuesses({...guesses, [guessIndex]: guess.slice(0, -1) })
@@ -247,6 +249,15 @@ const Juego = ({}) => {
         setCustomInterval((intervalo))
         setGuesses(defaultGuess)
         setGuessIndex(0)
+      }else{ 
+        ronda++
+        console.log(ronda)
+        console.log(rondas)
+        if (ronda == rondas) {
+          Alert.alert('Se acabaron las Rondas, gracias por jugar')
+          ronda = 0
+          navigation.navigate('Hub')
+        }
       }
     }, [gameComplete])
 
