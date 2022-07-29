@@ -8,6 +8,8 @@ import Register from "./screens/Register";
 import Verificacion from "./screens/Verificacion";
 import Hub from "./screens/Hub"
 import Juego from "./screens/Juego"
+import CrearRoom from "./screens/CrearRoom";
+import EntrarRoom from "./screens/EntrarRoom";
 
 const Stack = createNativeStackNavigator()
 
@@ -16,12 +18,15 @@ export default function App () {
     <NavigationContainer>
         <Stack.Navigator
           screenOptions={{headerShown: false}}>
+          <Stack.Screen name='Hub' component={Hub}/>
           <Stack.Screen name='Home' component={Home}/>
           <Stack.Screen name='Login' component={Login}/>
           <Stack.Screen name='Register' component={Register}/>
           <Stack.Screen name='Verificacion' component={Verificacion}/>
-          <Stack.Screen name='Hub' component={Hub}/>
+          
           <Stack.Screen name='Juego' component={Juego}/>
+          <Stack.Screen name='EntrarRoom' component={EntrarRoom}/>
+          <Stack.Screen name='CrearRoom' component={CrearRoom}/>
         </Stack.Navigator>
       </NavigationContainer>
   )

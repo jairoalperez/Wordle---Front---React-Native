@@ -1,10 +1,14 @@
 import { color } from "@rneui/base";
 import React from "react";
 import {View, StyleSheet, Text, TouchableOpacity, Button} from "react-native";
+import CrearRoom from "./CrearRoom";
 
 /*---------------------------------------------------------------------------------------
 -------------------------------- Bloque de Letras ---------------------------------------
 ---------------------------------------------------------------------------------------*/
+
+
+
 const Block = ({
   index,
   guess,
@@ -138,9 +142,9 @@ const defaultGuess = {
 /*---------------------------------------------------------------------------------------
 ------------------------------------- Funcionalidad del Juego ---------------------------
 ---------------------------------------------------------------------------------------*/ 
-const Juego = ({navigation}) => {
+const Juego = ({}) => {
 
-  const tiempo = 100
+  const tiempo = global.time
   var intervalo = 1000
 
 

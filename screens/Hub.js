@@ -1,4 +1,3 @@
-import { color } from "@rneui/base";
 import React from "react";
 import {View, StyleSheet, Text, Image, TouchableOpacity} from "react-native";
 import logo from '../assets/logo.png'
@@ -15,11 +14,21 @@ const Hub = ({navigation}) => {
 
       <TouchableOpacity
       onPress={() => {
-        navigation.navigate('Juego')
+        navigation.navigate('CrearRoom')
       }}
       style={styles.buttonlogin}>
         <Text style={styles.textbuttonl}>
-          Jugar
+          Crear Sala
+        </Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+      onPress={() => {
+        navigation.navigate('EntrarRoom')
+      }}
+      style={styles.buttonregister}>
+        <Text style={styles.textbuttonr}>
+          Unirse a Sala
         </Text>
       </TouchableOpacity>
       
