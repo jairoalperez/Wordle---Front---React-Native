@@ -9,7 +9,9 @@ const crearRoomURL = 'http://localhost:5000/search-room/3'
 const CrearRoom = ({}) => {
     const navigation = useNavigation();
 
-    /*var [room, setRoom] = useState({
+
+
+   /* var [room, setRoom] = useState({
         idroom: 0,
         time: 0,
         rondas: 0,
@@ -57,10 +59,39 @@ const CrearRoom = ({}) => {
 
             <TouchableOpacity
                 onPress={() => {
-                    navigation.navigate('Juego')
+                    /*navigation.navigate('Juego')
                     console.log(global.idroomc)
                     console.log(global.time)
-                    console.log(global.rondas)
+                    console.log(global.rondas)*/
+
+
+                    
+                    /*fetch('https://localhost:5000/search-room/3', {
+                      method: 'GET',
+                      headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        firstParam: 'yourValue'
+                      })
+                    });*/
+                    
+                    
+                    try {
+                      const response = fetch(
+                        'https://backend-axel.herokuapp.com/buscar-post/1', {method: 'GET'}
+                      )
+                      .then((response) => response.json())
+                      .then((json) => {
+                      console.log(json)
+                      })
+                    } catch (error) {
+                      console.error(error);
+                    }
+
+                    
+
                 }}
                 style={styles.button}>
                     <Text style={styles.textbutton}>
