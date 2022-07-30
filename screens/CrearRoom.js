@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import {View, StyleSheet, Text, TouchableOpacity, TextInput} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import "../global"
+import { ActivityIndicator, FlatList } from "react-native-web";
+
+const crearRoomURL = 'http://localhost:5000/search-room/3'
 
 const CrearRoom = ({}) => {
     const navigation = useNavigation();
 
-    var [room, setRoom] = useState({
+    /*var [room, setRoom] = useState({
         idroom: 0,
         time: 0,
         rondas: 0,
-    })
+    })*/
 
     const handleChangeText = (idroom, value) => {
         setRoom({...room, [idroom]: value})
@@ -23,6 +26,7 @@ const CrearRoom = ({}) => {
                 Crear Room
             </Text>
 
+            
 
             <TextInput
             style={styles.tinputce}
