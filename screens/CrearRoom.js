@@ -59,10 +59,10 @@ const CrearRoom = ({}) => {
 
             <TouchableOpacity
                 onPress={() => {
-                    /*navigation.navigate('Juego')
+                    navigation.navigate('Juego')
                     console.log(global.idroomc)
                     console.log(global.time)
-                    console.log(global.rondas)*/
+                    console.log(global.rondas)
 
 
                     
@@ -78,7 +78,7 @@ const CrearRoom = ({}) => {
                     });*/
                     
                     
-                    try {
+                    /*try {
                       const response = fetch(
                         'https://backend-axel.herokuapp.com/buscar-post/1', {method: 'GET'}
                       )
@@ -88,7 +88,7 @@ const CrearRoom = ({}) => {
                       })
                     } catch (error) {
                       console.error(error);
-                    }
+                    }*/
 
                     
 
