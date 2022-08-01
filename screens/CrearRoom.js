@@ -3,19 +3,18 @@ import {View, StyleSheet, Text, TouchableOpacity, TextInput} from "react-native"
 import { useNavigation } from "@react-navigation/native";
 import "../global"
 import { ActivityIndicator, FlatList } from "react-native-web";
-
-const crearRoomURL = 'http://localhost:5000/search-room/3'
+import { useState } from "react";
 
 const CrearRoom = ({}) => {
     const navigation = useNavigation();
 
 
 
-   /* var [room, setRoom] = useState({
+    var [room, setRoom] = useState({
         idroom: 0,
         time: 0,
         rondas: 0,
-    })*/
+    })
 
     const handleChangeText = (idroom, value) => {
         setRoom({...room, [idroom]: value})
@@ -35,8 +34,8 @@ const CrearRoom = ({}) => {
             keyboardType='numbers-and-punctuation'
             placeholder='ID Room'
             placeholderTextColor= 'gray'
-            onChangeText={(value) => global.idroomc = value}
-            //onChangeText={(value) => handleChangeText('idroom', value)}
+            //onChangeText={(value) => global.idroomc = value}
+            onChangeText={(value) => handleChangeText('idroom', value)}
             />
 
             <TextInput
@@ -44,8 +43,8 @@ const CrearRoom = ({}) => {
             keyboardType='numbers-and-punctuation'
             placeholder='Tiempo (Segundos Max: 200)'
             placeholderTextColor= 'gray'
-            onChangeText={(value) => global.time = value}
-            //onChangeText={(value) => handleChangeText('time', value)}
+            //onChangeText={(value) => global.time = value}
+            onChangeText={(value) => handleChangeText('time', value)}
             />
 
             <TextInput
@@ -53,44 +52,84 @@ const CrearRoom = ({}) => {
             keyboardType='numbers-and-punctuation'
             placeholder='Numero de Rondas'
             placeholderTextColor= 'gray'
-            onChangeText={(value) => global.rondas = value}
-            //onChangeText={(value) => handleChangeText('rondas', value)}
+            //onChangeText={(value) => global.rondas = value}
+            onChangeText={(value) => handleChangeText('rondas', value)}
             />
 
             <TouchableOpacity
                 onPress={() => {
-                    navigation.navigate('Juego')
-                    console.log(global.idroomc)
-                    console.log(global.time)
-                    console.log(global.rondas)
+                    //navigation.navigate('Juego')
 
-
-                    
-                    /*fetch('https://localhost:5000/search-room/3', {
-                      method: 'GET',
+                    /*try{fetch('https://backendwordleaja.herokuapp.com/create-room', {
+                      method: 'POST',
                       headers: {
                         Accept: 'application/json',
                         'Content-Type': 'application/json'
                       },
                       body: JSON.stringify({
-                        firstParam: 'yourValue'
+                        id_room: room.idroom,
+                        rounds: room.rondas,
+                        tiempo: room.time,
+                        author: global.autor
                       })
-                    });*/
+                    })
+                    }catch (error){
+                      console.error(error)
+                      console.log('no funciono fetch a llorar')
+                    }*/
                     
+                    global.idroomc = room.idroom
+                    //navigation.navigate('Juego')
                     
+                    var idr = null
+                    var r = null
+                    var t = null
+
                     /*try {
                       const response = fetch(
-                        'https://backend-axel.herokuapp.com/buscar-post/1', {method: 'GET'}
+                        'https://backendwordleaja.herokuapp.com/search-room/1', {method: 'GET'}
                       )
-                      .then((response) => response.json())
-                      .then((json) => {
-                      console.log(json)
+                      .then((respuesta) => respuesta.json())
+                      .then((data) => 
+                      {
+                      
+                      const datos = data
+                      console.log(datos)
+                      //console.log('variable global de ronda: '+global.idroomc)
+
+                      //const datos = data.rows[0]
+                      //console.log('los datos del json son: '+datos.idroom+', '+datos.rounds+', '+datos.tiempo)
                       })
                     } catch (error) {
-                      console.error(error);
+                      console.error(error)
+                      console.log('Error con el fetch');
                     }*/
 
-                    
+
+
+                    try {
+                      const response = fetch(
+                        'https://backend-wordle-axel.herokuapp.com/buscar-room/7', {method: 'GET'} 
+                      )
+                      .then((respuesta) => respuesta.json())
+                      .then((data) => 
+                      {
+                      
+                      //const datos = data
+                      console.log(data)
+                      //console.log('variable global de ronda: '+global.idroomc)
+
+                      //const datos = data.rows[0]
+                      //console.log('los datos del json son: '+datos.idroom+', '+datos.rounds+', '+datos.tiempo)
+                      })
+                    } catch (error) {
+                      console.error(error)
+                      console.log('Error con el fetch');
+                    }
+
+
+
+
 
                 }}
                 style={styles.button}>

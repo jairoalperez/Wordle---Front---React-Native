@@ -144,6 +144,19 @@ const defaultGuess = {
 ---------------------------------------------------------------------------------------*/ 
 const Juego = ({navigation}) => {
 
+  try {
+    const response = fetch(
+      'https://backendwordleaja.herokuapp.com/search-room/',global.idrondac, {method: 'GET'}
+    )
+    .then((response) => response.json())
+    .then((json) => {
+    console.log(json)
+    console.log('los datos del json son: '+json.idroom+', '+json.rounds+', '+json.tiempo)
+    })
+  } catch (error) {
+    console.error(error);
+  }
+
   const tiempo = global.time
   var intervalo = 1000
   const rondas = global.rondas
