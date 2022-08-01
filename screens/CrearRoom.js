@@ -109,18 +109,15 @@ const CrearRoom = ({}) => {
 
                     try {
                       const response = fetch(
-                        'https://backend-wordle-axel.herokuapp.com/buscar-room/7', {method: 'GET'} 
+                        'https://backendwordleaja.herokuapp.com/search-roomrounds/2', {method: 'GET'} 
                       )
                       .then((respuesta) => respuesta.json())
                       .then((data) => 
                       {
                       
-                      //const datos = data
+                      
                       console.log(data)
-                      //console.log('variable global de ronda: '+global.idroomc)
-
-                      //const datos = data.rows[0]
-                      //console.log('los datos del json son: '+datos.idroom+', '+datos.rounds+', '+datos.tiempo)
+                      
                       })
                     } catch (error) {
                       console.error(error)
