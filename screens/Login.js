@@ -55,19 +55,18 @@ const Login = ({}) => {
                           })
                           .then((resp) => resp.json())
                           .then((data) => {
-                            console.log (data)
-                            Alert.alert('Login Satisfactorio')
-                            navigation.navigate('Hub')
+                            if (data == 'G') {
+                              Alert.alert('Login Satisfactorio')
+                              navigation.navigate('Hub')
+                            }else {
+                              Alert.alert('Credenciales Incorrectas')
+                            }
                           })
                           }catch (error){
                             console.error(error)
                             console.log('no funciono fetch a llorar')
                             Alert.alert('Credenciales invalidas')
                           }
-
-                    //console.log(log.username)
-                    //console.log(log.pass)
-                    
                 }}
                 style={styles.button}>
                     <Text style={styles.textbutton}>
