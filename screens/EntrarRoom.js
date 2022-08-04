@@ -26,8 +26,9 @@ const EntrarRoom = ({}) => {
 
             <TouchableOpacity
                 onPress={() => {
-                    navigation.navigate('Juego')
-                    console.log(global.idroome)
+                    
+                  
+                    
                 }}
                 style={styles.button}>
                     <Text style={styles.textbutton}>

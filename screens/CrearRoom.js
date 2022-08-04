@@ -34,8 +34,7 @@ const CrearRoom = ({}) => {
             keyboardType='numbers-and-punctuation'
             placeholder='ID Room'
             placeholderTextColor= 'gray'
-            //onChangeText={(value) => global.idroomc = value}
-            onChangeText={(value) => handleChangeText('idroom', value)}
+            onChangeText={(value) => global.idroomc = value}
             />
 
             <TextInput
@@ -43,8 +42,7 @@ const CrearRoom = ({}) => {
             keyboardType='numbers-and-punctuation'
             placeholder='Tiempo (Segundos Max: 200)'
             placeholderTextColor= 'gray'
-            //onChangeText={(value) => global.time = value}
-            onChangeText={(value) => handleChangeText('time', value)}
+            onChangeText={(value) => global.time = value}
             />
 
             <TextInput
@@ -52,83 +50,12 @@ const CrearRoom = ({}) => {
             keyboardType='numbers-and-punctuation'
             placeholder='Numero de Rondas'
             placeholderTextColor= 'gray'
-            //onChangeText={(value) => global.rondas = value}
-            onChangeText={(value) => handleChangeText('rondas', value)}
+            onChangeText={(value) => global.rondas = value}
             />
 
             <TouchableOpacity
                 onPress={() => {
-                    
-
-                    try{fetch('https://backendwordleaja.herokuapp.com/create-room', {
-                      method: 'POST',
-                      headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json'
-                      },
-                      body: JSON.stringify({
-                        id_room: room.idroom,
-                        rounds: room.rondas,
-                        tiempo: room.time,
-                        author: global.autor
-                      })
-                    })
-                    }catch (error){
-                      console.error(error)
-                      console.log('no funciono fetch a llorar')
-                    }
-                  
-                    global.idroomc = room.idroom
-                    //navigation.navigate('Juego')
-
-                    var r = 0
-                    var t = 0
-                    var id = 0
-
-                    try {
-                      const responseid = fetch(
-                        'https://backendwordleaja.herokuapp.com/search-roomrounds/'+global.idroomc, {method: 'GET'} 
-                      )
-                      .then((respuesta) => respuesta.json())
-                      .then((datar) => {
-
-                        r = datar
-                      })
-
-                      const responser = fetch(
-                        'https://backendwordleaja.herokuapp.com/search-roomtiempo/'+global.idroomc, {method: 'GET'} 
-                      )
-                      .then((respuesta) => respuesta.json())
-                      .then((datat) => {
-
-                        t = datat
-                      })
-
-                      const responset = fetch(
-                        'https://backendwordleaja.herokuapp.com/search-room/'+global.idroomc, {method: 'GET'} 
-                      )
-                      .then((respuesta) => respuesta.json())
-                      .then((dataid) => {
-
-                        id = dataid
-                      })
-
-                      
-                      
-                      
-
-                      console.log(r)
-                      console.log(t)
-                      console.log(id)
-
-                    } catch (error) {
-                      console.error(error)
-                      console.log('Error con el fetch');
-                    }
-
-
-
-
+                  navigation.navigate('Juego')
 
                 }}
                 style={styles.button}>

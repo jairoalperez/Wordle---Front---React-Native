@@ -109,7 +109,7 @@ const GuessRow = ({
 /*---------------------------------------------------------------------------------------
 ------------------------------------- Palabras Registradas ------------------------------
 ---------------------------------------------------------------------------------------*/
-const words = ["APOYO", "ARMES", "BESOS", "ARCOS", "BOTAS", "BOTAN", "ASILO", "BRUTA", "BRUTO", "BUSES", "AÉREA", "AZOTE", "AGUDO", "BAÑOS",
+const words = ["APOYO", "ARMES", "BESOS", "ARCOS", "BOTAS", "BOTAN", "ASILO", "BRUTA", "BRUTO", "BUSES", "AEREA", "AZOTE", "AGUDO", "BAÑOS",
                "CAJAS", "RAMPA", "CALCE", "CHILE", "CUNAS", "CURSO", "CREMA", "CRECE", "CANSA", "COJOS", "CAUSA", "CERDO", "DONEN", "COMAS",
                "DATOS", "CAZAN", "DOMAN", "DILES", "DENSA", "DAÑOS", "CERAS", "FIRMA", "FORME", "HIJAS", "HIJOS", "GANAS", "GANAR", "GANES", 
                "GAFAS", "HILOS", "HINCA", "HINCO", "GIROS", "GIRAS", "GORDA", "GORDO", "IDEAS", "EVITA", "JAPON", "JALON", "FETOS", "FILAS", 
@@ -187,6 +187,7 @@ const Juego = ({navigation}) => {
   const [guessIndex, setGuessIndex] = React.useState(0)
   const [guesses, setGuesses] = React.useState(defaultGuess)
   const [gameComplete, setGameComplete] = React.useState(false)
+  const [pts, setPts] = React.useState(0) 
 
     const handleKeyPress = (letter) => {
       const guess = guesses[guessIndex]
@@ -209,6 +210,7 @@ const Juego = ({navigation}) => {
         if (guess === activeWord) {
           setGuessIndex(guessIndex + 1)
           setGameComplete(true)
+          setPts(pts + 1)
           alert("Ganaste, Felicidades Crack!")
           return
         }
@@ -251,10 +253,8 @@ const Juego = ({navigation}) => {
         setGuessIndex(0)
       }else{ 
         ronda++
-        console.log(ronda)
-        console.log(rondas)
         if (ronda == rondas) {
-          Alert.alert('Se acabaron las Rondas, gracias por jugar')
+          Alert.alert('Juego Terminado, Aprobaste '+pts+' rondas de '+rondas+' !!!')
           ronda = 0
           navigation.navigate('Hub')
         }
@@ -318,7 +318,7 @@ const Juego = ({navigation}) => {
               }}
               style={styles.buttonRestart}>
               <Text style={styles.textbuttonR}>
-                Comenzar de Nuevo
+                Siguiente Ronda
               </Text>
             </TouchableOpacity>
             </View>
