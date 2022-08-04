@@ -35,6 +35,7 @@ const CrearRoom = ({}) => {
             placeholder='ID Room'
             placeholderTextColor= 'gray'
             onChangeText={(value) => global.idroomc = value}
+            //onChangeText={(value) => handleChangeText('idroom', value)}
             />
 
             <TextInput
@@ -55,8 +56,9 @@ const CrearRoom = ({}) => {
 
             <TouchableOpacity
                 onPress={() => {
+                    
                   navigation.navigate('Juego')
-
+                  
                 }}
                 style={styles.button}>
                     <Text style={styles.textbutton}>

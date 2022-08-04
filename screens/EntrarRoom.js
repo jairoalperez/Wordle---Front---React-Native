@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {View, StyleSheet, Text, TouchableOpacity, TextInput} from "react-native";
+import {View, StyleSheet, Text, TouchableOpacity, TextInput, Alert} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import CrearRoom from "./CrearRoom";
 import '../global'
@@ -27,7 +27,7 @@ const EntrarRoom = ({}) => {
             <TouchableOpacity
                 onPress={() => {
                     
-                  
+                  Alert.alert('En este momento esta funcion no ha sido implementada en el juego, pero lo sera pronto!')
                     
                 }}
                 style={styles.button}>

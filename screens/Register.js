@@ -1,8 +1,23 @@
 import React from "react";
 import {View, StyleSheet, Text, Image, TouchableOpacity, Alert, TextInput} from "react-native";
+import { useState } from "react";
 
 
 const Register = ({navigation}) => {
+
+  const [user, setUser] = useState({
+    name: '',
+    user: '',
+    email: '',
+    pass: '',
+    passc: ''
+})
+
+const handleChangeText = (name, value) => {
+  setUser({...user, [name]: value})
+}
+
+
     return (
         <View style={styles.container}>
 
@@ -14,38 +29,72 @@ const Register = ({navigation}) => {
             style={styles.tinput1} 
             keyboardType='default'
             placeholder='Nombre Completo'
-            placeholderTextColor= 'gray'/>
+            placeholderTextColor= 'gray'
+            onChangeText={(value) => handleChangeText('name', value)}/>
 
             <TextInput
             style={styles.tinput} 
             keyboardType='default'
             placeholder='Username'
-            placeholderTextColor= 'gray'/>
+            placeholderTextColor= 'gray'
+            onChangeText={(value) => handleChangeText('user', value)}/>
 
             <TextInput
             style={styles.tinput} 
             keyboardType='email-address'
             placeholder='Correo Electronico'
-            placeholderTextColor= 'gray'/>
+            placeholderTextColor= 'gray'
+            onChangeText={(value) => handleChangeText('email', value)}/>
 
             <TextInput
             secureTextEntry={true} 
             style={styles.tinput} 
             keyboardType='default'
             placeholder='Contraseña'
-            placeholderTextColor= 'gray'/>
+            placeholderTextColor= 'gray'
+            onChangeText={(value) => handleChangeText('pass', value)}/>
 
             <TextInput
             secureTextEntry={true} 
             style={styles.tinput} 
             keyboardType='default'
             placeholder='Confirmar Contraseña'
-            placeholderTextColor= 'gray'/>
+            placeholderTextColor= 'gray'
+            onChangeText={(value) => handleChangeText('passc', value)}/>
 
             <TouchableOpacity
                 onPress={() => { 
-                    navigation.navigate('Verificacion')
-                    Alert.alert('Ingresar codigo de verificacion recibido en el correo')
+
+                  if(user.pass === user.passc){
+                    try {
+                      fetch('https://backendwordleaja.herokuapp.com/register', {
+                        method: 'POST',
+                        headers: {
+                        Accept: 'application/json',
+                                'Content-Type': 'application/json'
+                          },
+                          body: JSON.stringify({
+                              nombre: user.name,
+                              username: user.user,
+                              correo: user.email,
+                              clave: user.pass
+                            })
+                          })
+                          .then((resp) => resp.json())
+                          .then((data) => {
+                            console.log (data)
+                            Alert.alert('Registro Satisfactorio')
+                            navigation.navigate('Home')
+                          })
+                          }catch (error){
+                            console.error(error)
+                            console.log('no funciono fetch a llorar')
+                            Alert.alert('No se pudo registrar este usuario')
+                          }
+                  }else{
+                    Alert.alert('Las contraseñas deben coincidir')
+                  }
+                    
                 }}
                 style={styles.button}>
                     <Text style={styles.textbutton}>
