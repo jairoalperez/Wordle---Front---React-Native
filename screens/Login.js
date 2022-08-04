@@ -1,9 +1,20 @@
 import React from "react";
-import {View, StyleSheet, Text, TouchableOpacity, TextInput} from "react-native";
+import {View, StyleSheet, Text, TouchableOpacity, TextInput, Alert} from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { useState } from "react";
 
 const Login = ({}) => {
     const navigation = useNavigation();
+
+    const [log, setLog] = useState({
+      username: '',
+      pass: '',
+  })
+
+  const handleChangeText = (username, value) => {
+    setLog({...log, [username]: value})
+  }
+
     return (
         <View style={styles.container}>
 
@@ -13,20 +24,49 @@ const Login = ({}) => {
 
             <TextInput
             style={styles.tinputce} 
-            keyboardType='email-address'
-            placeholder='Correo Electronico'
-            placeholderTextColor= 'gray'/>
+            keyboardType='default'
+            placeholder='Username'
+            placeholderTextColor= 'gray'
+            onChangeText={(value) => handleChangeText('username', value)}/>
 
             <TextInput
             secureTextEntry={true} 
             style={styles.tinputp}
             keyboardType='default'
             placeholder='Contraseña'
-            placeholderTextColor= 'gray'/>
+            placeholderTextColor= 'gray'
+            onChangeText={(value) => handleChangeText('pass', value)}/>
 
             <TouchableOpacity
                 onPress={() => {
-                    navigation.navigate('Hub')
+                    //navigation.navigate('Hub')
+
+                    try {
+                      fetch('https://backendwordleaja.herokuapp.com/login', {
+                        method: 'POST',
+                        headers: {
+                        Accept: 'application/json',
+                                'Content-Type': 'application/json'
+                          },
+                          body: JSON.stringify({
+                              username: log.username,
+                              password: log.pass
+                            })
+                          })
+                          .then((resp) => resp.json())
+                          .then((data) => {
+                            console.log (data)
+                            Alert.alert('Login Satisfactorio')
+                            navigation.navigate('Hub')
+                          })
+                          }catch (error){
+                            console.error(error)
+                            console.log('no funciono fetch a llorar')
+                            Alert.alert('Credenciales invalidas')
+                          }
+
+                    //console.log(log.username)
+                    //console.log(log.pass)
                     
                 }}
                 style={styles.button}>
