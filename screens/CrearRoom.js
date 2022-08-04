@@ -58,9 +58,9 @@ const CrearRoom = ({}) => {
 
             <TouchableOpacity
                 onPress={() => {
-                    //navigation.navigate('Juego')
+                    
 
-                    /*try{fetch('https://backendwordleaja.herokuapp.com/create-room', {
+                    try{fetch('https://backendwordleaja.herokuapp.com/create-room', {
                       method: 'POST',
                       headers: {
                         Accept: 'application/json',
@@ -76,49 +76,51 @@ const CrearRoom = ({}) => {
                     }catch (error){
                       console.error(error)
                       console.log('no funciono fetch a llorar')
-                    }*/
-                    
+                    }
+                  
                     global.idroomc = room.idroom
                     //navigation.navigate('Juego')
-                    
-                    var idr = null
-                    var r = null
-                    var t = null
 
-                    /*try {
-                      const response = fetch(
-                        'https://backendwordleaja.herokuapp.com/search-room/1', {method: 'GET'}
-                      )
-                      .then((respuesta) => respuesta.json())
-                      .then((data) => 
-                      {
-                      
-                      const datos = data
-                      console.log(datos)
-                      //console.log('variable global de ronda: '+global.idroomc)
-
-                      //const datos = data.rows[0]
-                      //console.log('los datos del json son: '+datos.idroom+', '+datos.rounds+', '+datos.tiempo)
-                      })
-                    } catch (error) {
-                      console.error(error)
-                      console.log('Error con el fetch');
-                    }*/
-
-
+                    var r = 0
+                    var t = 0
+                    var id = 0
 
                     try {
-                      const response = fetch(
-                        'https://backendwordleaja.herokuapp.com/search-roomrounds/2', {method: 'GET'} 
+                      const responseid = fetch(
+                        'https://backendwordleaja.herokuapp.com/search-roomrounds/'+global.idroomc, {method: 'GET'} 
                       )
                       .then((respuesta) => respuesta.json())
-                      .then((data) => 
-                      {
-                      
-                      
-                      console.log(data)
-                      
+                      .then((datar) => {
+
+                        r = datar
                       })
+
+                      const responser = fetch(
+                        'https://backendwordleaja.herokuapp.com/search-roomtiempo/'+global.idroomc, {method: 'GET'} 
+                      )
+                      .then((respuesta) => respuesta.json())
+                      .then((datat) => {
+
+                        t = datat
+                      })
+
+                      const responset = fetch(
+                        'https://backendwordleaja.herokuapp.com/search-room/'+global.idroomc, {method: 'GET'} 
+                      )
+                      .then((respuesta) => respuesta.json())
+                      .then((dataid) => {
+
+                        id = dataid
+                      })
+
+                      
+                      
+                      
+
+                      console.log(r)
+                      console.log(t)
+                      console.log(id)
+
                     } catch (error) {
                       console.error(error)
                       console.log('Error con el fetch');
