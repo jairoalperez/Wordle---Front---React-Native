@@ -87,7 +87,7 @@ const GuessRow = ({
     const Keyboard = ({ onKeyPress }) => {
     const row1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"]
     const row2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L", "Ñ"]
-    const row3 = ["Z", "X", "C", "V", "B", "N", "M", "⌫"]
+    const row3 = ["Z", "X", "C", "V", "B", "N", "M"]
   
     return (
         <View style={styles.keyboard}>
@@ -96,8 +96,13 @@ const GuessRow = ({
         <KeyboardRow letters={row3} onKeyPress={onKeyPress}/>
         <View style={styles.keyboardRow}>
         <TouchableOpacity onPress={() => onKeyPress("ENTER")}>
-          <View style={styles.key}>
-            <Text style={styles.keyLetter}>ENTER</Text>
+          <View style={styles.keye}>
+            <Text style={styles.keyLettereb}>ENTER</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => onKeyPress("⌫")}>
+          <View style={styles.keyb}>
+            <Text style={styles.keyLettereb}>⌫</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -348,7 +353,7 @@ const styles = StyleSheet.create({
 
     //Contenedor de los cuadros
     containerj: {
-        marginBottom: 40,
+        marginBottom: 10,
     },
 
     //Fila
@@ -359,11 +364,12 @@ const styles = StyleSheet.create({
 
     //Cuadrado
     guessSquare: {
-        borderColor: "white",
-        backgroundColor : "black",
-        borderWidth: 2,
-        width: 50,
-        height: 50,
+        borderColor: "black",
+        backgroundColor : "white",
+        borderWidth: 3,
+        borderRadius: 25,
+        width: 60,
+        height: 60,
         alignItems: "center",
         justifyContent: "center",
         margin: 5,
@@ -371,9 +377,9 @@ const styles = StyleSheet.create({
     
     //Letra
     guessLetter: {
-        fontSize: 20,
+        fontSize: 25,
         fontWeight: "bold",
-        color: "white",
+        color: "black",
       },
 
     //Contenedor del teclado
@@ -396,10 +402,34 @@ const styles = StyleSheet.create({
         borderRadius: 5,
     },
 
+    //Contenedor de la letra enter
+    keye: {
+      backgroundColor: "darkblue",
+      marginRight: 20,
+      padding: 10,
+      margin: 3,
+      borderRadius: 5,
+    },
+
+    //Contenedor de la letra borrar
+    keyb: {
+      backgroundColor: "darkred",
+      padding: 10,
+      margin: 3,
+      borderRadius: 5,
+    },
+
     //Letra del teclado
     keyLetter: {
         fontWeight: "500",
         fontSize: 20,
+    },
+
+    //Letra del teclado enter y borrar
+    keyLettereb: {
+      fontWeight: "500",
+      fontSize: 30,
+      color: 'white',
     },
 
     //Color de las letras seleccionadas

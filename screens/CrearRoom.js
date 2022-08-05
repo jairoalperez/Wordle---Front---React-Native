@@ -2,23 +2,11 @@ import React from "react";
 import {View, StyleSheet, Text, TouchableOpacity, TextInput} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import "../global"
-import { ActivityIndicator, FlatList } from "react-native-web";
-import { useState } from "react";
+
+//Screen que contiene las opciones de crear una room
 
 const CrearRoom = ({}) => {
     const navigation = useNavigation();
-
-
-
-    var [room, setRoom] = useState({
-        idroom: 0,
-        time: 0,
-        rondas: 0,
-    })
-
-    const handleChangeText = (idroom, value) => {
-        setRoom({...room, [idroom]: value})
-    }
 
     return (
         <View style={styles.container}>
@@ -27,27 +15,24 @@ const CrearRoom = ({}) => {
                 Crear Room
             </Text>
 
-            
-
             <TextInput
-            style={styles.tinputce}
+            style={styles.tinput1}
             keyboardType='numbers-and-punctuation'
             placeholder='ID Room'
             placeholderTextColor= 'gray'
             onChangeText={(value) => global.idroomc = value}
-            //onChangeText={(value) => handleChangeText('idroom', value)}
             />
 
             <TextInput
-            style={styles.tinputp}
+            style={styles.tinput}
             keyboardType='numbers-and-punctuation'
-            placeholder='Tiempo (Segundos Max: 200)'
+            placeholder='Tiempo (Segundos)'
             placeholderTextColor= 'gray'
             onChangeText={(value) => global.time = value}
             />
 
             <TextInput
-            style={styles.tinputp}
+            style={styles.tinput}
             keyboardType='numbers-and-punctuation'
             placeholder='Numero de Rondas'
             placeholderTextColor= 'gray'
@@ -71,6 +56,10 @@ const CrearRoom = ({}) => {
 };
 export default CrearRoom
 
+
+/*---------------------------------------------------------------------------------------
+------------------------------------- Estilos -------------------------------------------
+---------------------------------------------------------------------------------------*/ 
 const styles = StyleSheet.create({
 
     container: {
@@ -87,7 +76,7 @@ const styles = StyleSheet.create({
         color: '#6baa64'
     
       },
-      tinputce: {
+      tinput1: {
         height: 40,
         marginTop: 80,
         padding: 10,
@@ -97,7 +86,7 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
 
       },
-      tinputp: {
+      tinput: {
         height: 40,
         marginTop: 12,
         padding: 10,

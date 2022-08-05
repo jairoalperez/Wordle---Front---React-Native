@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import {View, StyleSheet, Text, TouchableOpacity, TextInput, Alert} from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import CrearRoom from "./CrearRoom";
 import '../global'
+
+//Screen que contendria la funcion para unirse a una room
 
 const EntrarRoom = ({}) => {
     const navigation = useNavigation();
-
 
     return (
         <View style={styles.container}>
@@ -17,7 +17,7 @@ const EntrarRoom = ({}) => {
 
 
             <TextInput
-            style={styles.tinputce}
+            style={styles.tinput}
             keyboardType='numbers-and-punctuation'
             placeholder='ID Room'
             placeholderTextColor= 'gray'
@@ -26,7 +26,7 @@ const EntrarRoom = ({}) => {
 
             <TouchableOpacity
                 onPress={() => {
-                    
+                  //navigation.navigate('Juego')
                   Alert.alert('En este momento esta funcion no ha sido implementada en el juego, pero lo sera pronto!')
                     
                 }}
@@ -41,6 +41,9 @@ const EntrarRoom = ({}) => {
 };
 export default EntrarRoom
 
+/*---------------------------------------------------------------------------------------
+------------------------------------- Estilos -------------------------------------------
+---------------------------------------------------------------------------------------*/ 
 const styles = StyleSheet.create({
 
     container: {
@@ -57,7 +60,7 @@ const styles = StyleSheet.create({
         color: '#6baa64'
     
       },
-      tinputce: {
+      tinput: {
         height: 40,
         marginTop: 80,
         padding: 10,
@@ -66,16 +69,6 @@ const styles = StyleSheet.create({
         borderRadius: 40,
         backgroundColor: "white",
 
-      },
-      tinputp: {
-        height: 40,
-        marginTop: 12,
-        padding: 10,
-        height: 50, 
-        width: 250,
-        borderRadius: 40,
-        backgroundColor: "white"
-        
       },
       button: {
         backgroundColor: "#6baa64",

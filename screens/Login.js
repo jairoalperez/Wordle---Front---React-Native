@@ -6,11 +6,13 @@ import { useState } from "react";
 const Login = ({}) => {
     const navigation = useNavigation();
 
+    //Se declara el state log con los parametros del username y password que recibiran de los text input
     const [log, setLog] = useState({
       username: '',
       pass: '',
   })
 
+  //Se utiliza para setear los parametros del state log
   const handleChangeText = (username, value) => {
     setLog({...log, [username]: value})
   }
@@ -23,7 +25,7 @@ const Login = ({}) => {
             </Text>
 
             <TextInput
-            style={styles.tinputce} 
+            style={styles.tinputu} 
             keyboardType='default'
             placeholder='Username'
             placeholderTextColor= 'gray'
@@ -39,8 +41,9 @@ const Login = ({}) => {
 
             <TouchableOpacity
                 onPress={() => {
-                    //navigation.navigate('Hub')
 
+                    //Fetch que se comunica con el servidor para el login, envia los dos parametros, luego recibe una 
+                    //respuesta que puede ser 'G' u 'F', para indicar si se logro la autenticacion.
                     try {
                       fetch('https://backendwordleaja.herokuapp.com/login', {
                         method: 'POST',
@@ -65,8 +68,8 @@ const Login = ({}) => {
                           }catch (error){
                             console.error(error)
                             console.log('no funciono fetch a llorar')
-                            Alert.alert('Credenciales invalidas')
                           }
+
                 }}
                 style={styles.button}>
                     <Text style={styles.textbutton}>
@@ -78,6 +81,10 @@ const Login = ({}) => {
     )
 };
 
+
+/*---------------------------------------------------------------------------------------
+------------------------------------- Estilos -------------------------------------------
+---------------------------------------------------------------------------------------*/ 
 const styles = StyleSheet.create({
 
     container: {
@@ -94,7 +101,7 @@ const styles = StyleSheet.create({
         color: '#6baa64'
     
       },
-      tinputce: {
+      tinputu: {
         height: 40,
         marginTop: 80,
         padding: 10,

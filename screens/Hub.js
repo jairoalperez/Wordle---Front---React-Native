@@ -2,6 +2,9 @@ import React from "react";
 import {View, StyleSheet, Text, Image, TouchableOpacity} from "react-native";
 import logo from '../assets/logo.png'
 
+
+//Este es el hub en el que el usuario tendra sus respectivas opciones antes de jugar
+
 const Hub = ({navigation}) => {
     return (
 
@@ -16,8 +19,8 @@ const Hub = ({navigation}) => {
       onPress={() => {
         navigation.navigate('CrearRoom')
       }}
-      style={styles.buttonlogin}>
-        <Text style={styles.textbuttonl}>
+      style={styles.buttoncrear}>
+        <Text style={styles.textbuttonc}>
           Crear Sala
         </Text>
       </TouchableOpacity>
@@ -26,9 +29,19 @@ const Hub = ({navigation}) => {
       onPress={() => {
         navigation.navigate('EntrarRoom')
       }}
-      style={styles.buttonregister}>
-        <Text style={styles.textbuttonr}>
+      style={styles.buttonunir}>
+        <Text style={styles.textbuttonu}>
           Unirse a Sala
+        </Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+      onPress={() => {
+        navigation.navigate('Home')
+      }}
+      style={styles.buttoncerrar}>
+        <Text style={styles.textbuttoncer}>
+          Cerrar Sesion
         </Text>
       </TouchableOpacity>
       
@@ -37,6 +50,10 @@ const Hub = ({navigation}) => {
 };
 export default Hub
 
+
+/*---------------------------------------------------------------------------------------
+------------------------------------- Estilos -------------------------------------------
+---------------------------------------------------------------------------------------*/ 
 const styles = StyleSheet.create({
 
     container: {
@@ -46,20 +63,13 @@ const styles = StyleSheet.create({
       backgroundColor: "lightgreen",
   
     },
-    title: {
-      fontSize: 40,
-      marginBottom: 50,
-      fontWeight: 'bold',
-      color: '#6baa64'
-  
-    },
     image: {
       marginBottom: 40,  
       height: 184, 
       width: 368,
   
     },
-    buttonlogin: {
+    buttoncrear: {
       backgroundColor: "white",
       padding: 10,
       marginTop: 80,
@@ -71,7 +81,7 @@ const styles = StyleSheet.create({
       width: 150,
     
     },
-    buttonregister: {
+    buttonunir: {
       backgroundColor: '#6baa64',
       padding: 10,
       borderRadius: 40,
@@ -81,12 +91,30 @@ const styles = StyleSheet.create({
       width: 150,
     
     },
-    textbuttonl: {
+    buttoncerrar: {
+      backgroundColor: 'darkred',
+      padding: 10,
+      borderRadius: 40,
+      justifyContent: "center",
+      alignItems: "center",
+      height: 50, 
+      width: 200,
+      marginTop: 100,
+    
+    },
+
+    textbuttonc: {
       fontSize: 20,
       
     },
   
-    textbuttonr: {
+    textbuttonu: {
+      fontSize: 20,
+      color: "white",
+      
+    },
+
+    textbuttoncer: {
       fontSize: 20,
       color: "white",
       

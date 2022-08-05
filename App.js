@@ -2,6 +2,7 @@ import React from "react";
 import {NavigationContainer} from '@react-navigation/native'
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
+//Aqui se importan todas las Screens del juego
 import Home from './screens/Home'
 import Login from './screens/Login'
 import Register from "./screens/Register";
@@ -11,14 +12,15 @@ import Juego from "./screens/Juego"
 import CrearRoom from "./screens/CrearRoom";
 import EntrarRoom from "./screens/EntrarRoom";
 
+//Se utiliza createNativeStackNavigator para crear el navegador entre screens
 const Stack = createNativeStackNavigator()
 
+//Se crea y se exporta la funcion en la que se stackean todas las screens
 export default function App () {
   return (
     <NavigationContainer>
         <Stack.Navigator
           screenOptions={{headerShown: false}}>
-          
           <Stack.Screen name='Home' component={Home}/>
           <Stack.Screen name='Login' component={Login}/>
           <Stack.Screen name='Register' component={Register}/>

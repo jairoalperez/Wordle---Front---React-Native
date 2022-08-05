@@ -1,10 +1,11 @@
 import React from "react";
-import {View, StyleSheet, Text, Image, TouchableOpacity, Alert, TextInput} from "react-native";
+import {View, StyleSheet, Text, TouchableOpacity, Alert, TextInput} from "react-native";
 import { useState } from "react";
 
 
 const Register = ({navigation}) => {
 
+  //Se declara el state user con los parametros que recibiran de los text input
   const [user, setUser] = useState({
     name: '',
     user: '',
@@ -13,6 +14,7 @@ const Register = ({navigation}) => {
     passc: ''
 })
 
+//Se utiliza para setear los parametros del state user
 const handleChangeText = (name, value) => {
   setUser({...user, [name]: value})
 }
@@ -65,7 +67,10 @@ const handleChangeText = (name, value) => {
             <TouchableOpacity
                 onPress={() => { 
 
+                  //if para confirmar si las contraseñas coinciden.
                   if(user.pass === user.passc){
+
+                    //Fetch que se comunica con el servidor para el register, envia los parametros y hace el registro en la base de datos.
                     try {
                       fetch('https://backendwordleaja.herokuapp.com/register', {
                         method: 'POST',
@@ -89,7 +94,7 @@ const handleChangeText = (name, value) => {
                           }catch (error){
                             console.error(error)
                             console.log('no funciono fetch a llorar')
-                            Alert.alert('No se pudo registrar este usuario')
+                            Alert.alert('No se pudo registrar este usuario, intente de nuevo')
                           }
                   }else{
                     Alert.alert('Las contraseñas deben coincidir')
@@ -108,6 +113,10 @@ const handleChangeText = (name, value) => {
     )
 };
 
+
+/*---------------------------------------------------------------------------------------
+------------------------------------- Estilos -------------------------------------------
+---------------------------------------------------------------------------------------*/ 
 const styles = StyleSheet.create({
 
     container: {
@@ -160,11 +169,6 @@ const styles = StyleSheet.create({
         color: "white",
         
       },
-      textf: {
-        fontSize: 15,
-        color: "white",
-        marginTop: 20,
-      }
 
 
 });

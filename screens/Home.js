@@ -1,6 +1,7 @@
-import { color } from "@rneui/base";
 import React from "react";
 import {View, StyleSheet, Text, Image, TouchableOpacity} from "react-native";
+
+//Se importa el logo del juego
 import logo from '../assets/logo.png'
 
 const Home = ({navigation}) => {
@@ -15,7 +16,7 @@ const Home = ({navigation}) => {
       source={logo}
       style={styles.image}
       />
-
+    
       <TouchableOpacity
       onPress={() => {
         navigation.navigate('Login')
@@ -41,6 +42,10 @@ const Home = ({navigation}) => {
 };
 export default Home
 
+
+/*---------------------------------------------------------------------------------------
+------------------------------------- Estilos -------------------------------------------
+---------------------------------------------------------------------------------------*/ 
 const styles = StyleSheet.create({
 
     container: {
